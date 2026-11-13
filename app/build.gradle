@@ -1,0 +1,46 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'com.gaston.horas'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.gaston.horas'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    // Misma firma siempre: así podés actualizar la app sin perder los registros
+    signingConfigs {
+        propia {
+            storeFile file('horas.keystore')
+            storePassword 'horas1234'
+            keyAlias 'horas'
+            keyPassword 'horas1234'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.propia
+        }
+        debug {
+            signingConfig signingConfigs.propia
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
